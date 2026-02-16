@@ -13,8 +13,7 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 add_executable(main main.cpp
-                mergeSort.cpp
-                mergeSort.h)
+        mergeSort.h)
 target_compile_features(main PRIVATE cxx_std_20)
 target_link_libraries(main PRIVATE SFML::Graphics)
 
