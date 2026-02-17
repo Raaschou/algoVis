@@ -20,6 +20,15 @@ int main() {
 
     window.setFramerateLimit(60);
 
+
+    float lineOffset = 20.f;
+    for (sf::RectangleShape& line : lines) {
+        line.setPosition({10.f, lineOffset});
+        window.draw(line);
+        lineOffset += 11.f;
+    }
+
+    // Render loop
     while (window.isOpen()) {
         while (const std::optional event = window.pollEvent()) {
             // "close requested" event: we close the window
@@ -28,13 +37,6 @@ int main() {
         }
 
         window.clear(sf::Color::Black);
-        float lineOffset = 20.f;
-
-        for (sf::RectangleShape& line : lines) {
-            line.setPosition({10.f, lineOffset});
-            window.draw(line);
-            lineOffset += 11.f;
-        }
 
         for (sf::RectangleShape& line : lines) {
             window.draw(line);
