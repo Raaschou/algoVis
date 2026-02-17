@@ -18,9 +18,6 @@ int main() {
         lineHeight += 50.f;
     }
 
-    //line.rotate(sf::degrees(90));
-    sf::Vector2f vectorTranslate {100.f, 100.f};
-    //line.setPosition(vectorTranslate);
     window.setFramerateLimit(60);
 
     while (window.isOpen()) {
@@ -31,11 +28,17 @@ int main() {
         }
 
         window.clear(sf::Color::Black);
-        for (sf::RectangleShape line : lines) {
-            line.rotate(sf::degrees(90));
+        float lineOffset = 20.f;
+
+        for (sf::RectangleShape& line : lines) {
+            line.setPosition({10.f, lineOffset});
             window.draw(line);
+            lineOffset += 11.f;
         }
 
+        for (sf::RectangleShape& line : lines) {
+            window.draw(line);
+        }
 
         window.display();
     }
