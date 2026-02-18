@@ -10,7 +10,7 @@ int main() {
     for (float i : toSort) {
         std::cout << "[" << i << "]-";
     }
-    sf::RenderWindow window(sf::VideoMode({800, 600}), "Algo visualisation");
+
     std::vector<sf::RectangleShape> lines {};
     float lineHeight {150.f};
     for (float i : toSort) {
@@ -18,12 +18,15 @@ int main() {
         lineHeight += 50.f;
     }
 
-    window.setFramerateLimit(60);
 
+    sf::RenderWindow window(sf::VideoMode({800, 600}), "Algo visualisation");
+    window.setFramerateLimit(60);
 
     float lineOffset = 20.f;
     for (sf::RectangleShape& line : lines) {
-        line.setPosition({10.f, lineOffset});
+
+        line.rotate(sf::degrees(270));
+        line.setPosition({lineOffset, 100.f});
         window.draw(line);
         lineOffset += 11.f;
     }
