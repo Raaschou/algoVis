@@ -11,6 +11,14 @@ int main() {
         std::cout << "[" << i << "]-";
     }
 
+    std::random_device rd;
+    std::mt19937 rng(rd());
+    // Hack for shuffling list
+    std::vector<int> temp( toSort.begin(), toSort.end());
+    std::shuffle(temp.begin(), temp.end(), rng);
+    std::copy(temp.begin(), temp.end(), toSort.begin());
+
+
     std::vector<sf::RectangleShape> lines {};
     float lineHeight {150.f};
     for (float i : toSort) {
