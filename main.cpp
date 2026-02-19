@@ -26,6 +26,24 @@ int main() {
         lines.push_back(sf::RectangleShape({i, 5.f}));
     }
 
+    sf::VertexArray infoBox {sf::PrimitiveType::TriangleStrip, 5};
+    infoBox[0].position = sf::Vector2f(1250.f, 300.f);
+    infoBox[1].position = sf::Vector2f(1600.f, 300.f);
+    infoBox[2].position = sf::Vector2f(1600.f, 600.f);
+    infoBox[3].position = sf::Vector2f(1250.f, 600.f);
+    infoBox[4].position = sf::Vector2f(1250.f, 300.f);
+    infoBox[0].color = sf::Color::White;
+    infoBox[1].color = sf::Color::White;
+    infoBox[2].color = sf::Color::White;
+    infoBox[3].color = sf::Color::White;
+    infoBox[4].color = sf::Color::White;
+
+    const sf::Font font("0xProtoNerdFontMono-Regular.ttf");
+    sf::Text currentLine {font};
+    currentLine.setCharacterSize(20);
+    currentLine.setFillColor(sf::Color::Black);
+    currentLine.setPosition(sf::Vector2f(1250.f, 350.f));
+    currentLine.setString("Test string for testing purposes");
 
     sf::RenderWindow window(sf::VideoMode({1620, 1024}), "Algo visualisation");
     window.setFramerateLimit(60);
@@ -52,6 +70,8 @@ int main() {
         for (sf::RectangleShape& line : lines) {
             window.draw(line);
         }
+        window.draw(infoBox);
+        window.draw(currentLine);
 
         window.display();
     }
