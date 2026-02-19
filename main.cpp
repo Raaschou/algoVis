@@ -1,14 +1,16 @@
 #include <list>
 #include "mergeSort.h"
 #include <iostream>
+#include <random>
 #include <SFML/Graphics.hpp>
 
 
 int main() {
     std::cout << "Unsorted array:" << std::endl;
-    std::list<float> toSort = {1.f, 2.f, 3.f, 4.f, 5.f, 6.f, 7.f, 8.f, 9.f, 10.f };
-    for (float i : toSort) {
-        std::cout << "[" << i << "]-";
+    std::list<float> toSort = {};
+
+    for (int i = 1; i <= 200; i++) {
+        toSort.push_back(static_cast<float>(i));
     }
 
     std::random_device rd;
@@ -20,23 +22,21 @@ int main() {
 
 
     std::vector<sf::RectangleShape> lines {};
-    float lineHeight {150.f};
     for (float i : toSort) {
-        lines.push_back(sf::RectangleShape({lineHeight, 10.f}));
-        lineHeight += 50.f;
+        lines.push_back(sf::RectangleShape({i, 5.f}));
     }
 
 
-    sf::RenderWindow window(sf::VideoMode({800, 600}), "Algo visualisation");
+    sf::RenderWindow window(sf::VideoMode({1620, 1024}), "Algo visualisation");
     window.setFramerateLimit(60);
 
     float lineOffset = 20.f;
     for (sf::RectangleShape& line : lines) {
-
+        // Draw lines in correct orientation and position
         line.rotate(sf::degrees(270));
-        line.setPosition({lineOffset, 100.f});
+        line.setPosition({lineOffset, 1020.f});
         window.draw(line);
-        lineOffset += 11.f;
+        lineOffset += 6.f;
     }
 
     // Render loop
