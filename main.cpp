@@ -9,7 +9,7 @@ int main() {
     std::cout << "Unsorted array:" << std::endl;
     std::list<float> toSort = {};
 
-    for (int i = 1; i <= 200; i++) {
+    for (int i = 5; i <= 1000; i += 5) {
         toSort.push_back(static_cast<float>(i));
     }
 
@@ -46,7 +46,7 @@ int main() {
     currentLine.setCharacterSize(20);
     currentLine.setFillColor(sf::Color::Black);
     currentLine.setPosition(sf::Vector2f(1250.f, 350.f));
-    currentLine.setString("Test string for testing purposes");
+    currentLine.setString("Test string for\n testing purposes");
 
     sf::RenderWindow window(sf::VideoMode({1620, 1024}), "Algo visualisation");
     window.setFramerateLimit(60);
@@ -61,6 +61,39 @@ int main() {
         lineOffset += 6.f;
     }
 
+
+    std::function onUpdate = [&](const std::list<float>& state)
+    {
+        // Handle window events so it doesn't freeze
+        while (const std::optional event = window.pollEvent())
+        {
+            if (event->is<sf::Event::Closed>())
+                window.close();
+        }
+
+        // Update rectangle sizes
+        int i = 0;
+        for (float value : state)
+        {
+            lines[i].setSize({value, 5.f});
+            i++;
+        }
+
+        // Redraw everything
+        window.clear(sf::Color::Black);
+
+        for (auto& line : lines)
+            window.draw(line);
+
+        window.draw(infoBox);
+        window.draw(currentLine);
+
+        window.display();
+
+        // Slow down animation
+        sf::sleep(sf::milliseconds(15));
+    };
+
     // Render loop
     while (window.isOpen()) {
         while (const std::optional event = window.pollEvent()) {
@@ -69,7 +102,7 @@ int main() {
                 window.close();
             if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>() ) {
                 if (keyPressed->scancode == sf::Keyboard::Scancode::Enter) {
-                    mergeSort(toSort);
+                    toSort = mergeSort(toSort, onUpdate);
                 }
             }
         }
@@ -88,9 +121,7 @@ int main() {
     }
 
 
-    std::cout << std::endl << "Sorted array" << std::endl;
-    std::list<float> sorted {mergeSort<float>(toSort)};
-    for (float i : sorted) {
+    for (float i : toSort) {
         std::cout << "[" << i << "]-";
     }
 }
