@@ -62,7 +62,7 @@ int main() {
     }
 
 
-    std::function onUpdate = [&](const std::list<float>& state)
+    /*std::function onUpdate = [&](const std::list<float>& state)
     {
         // Handle window events so it doesn't freeze
         while (const std::optional event = window.pollEvent())
@@ -92,7 +92,7 @@ int main() {
 
         // Slow down animation
         sf::sleep(sf::milliseconds(15));
-    };
+    };*/
 
     // Render loop
     while (window.isOpen()) {
@@ -102,7 +102,7 @@ int main() {
                 window.close();
             if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>() ) {
                 if (keyPressed->scancode == sf::Keyboard::Scancode::Enter) {
-                    toSort = mergeSort(toSort, onUpdate);
+                    toSort = mergeSort(toSort, window, lines);
                 }
             }
         }
