@@ -62,38 +62,6 @@ int main() {
     }
 
 
-    /*std::function onUpdate = [&](const std::list<float>& state)
-    {
-        // Handle window events so it doesn't freeze
-        while (const std::optional event = window.pollEvent())
-        {
-            if (event->is<sf::Event::Closed>())
-                window.close();
-        }
-
-        // Update rectangle sizes
-        int i = 0;
-        for (float value : state)
-        {
-            lines[i].setSize({value, 5.f});
-            i++;
-        }
-
-        // Redraw everything
-        window.clear(sf::Color::Black);
-
-        for (auto& line : lines)
-            window.draw(line);
-
-        window.draw(infoBox);
-        window.draw(currentLine);
-
-        window.display();
-
-        // Slow down animation
-        sf::sleep(sf::milliseconds(15));
-    };*/
-
     // Render loop
     while (window.isOpen()) {
         while (const std::optional event = window.pollEvent()) {
